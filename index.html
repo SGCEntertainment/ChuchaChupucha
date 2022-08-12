@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Chucha Chupucha</title>
+	<link rel="stylesheet" href="Data/style.css">
+  </head>
+  <body style="text-align: center">
+    <canvas id="unity-canvas"></canvas>
+    <script src="Build/WebGL.loader.js"></script>
+    <script>
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/WebGL.data",
+        frameworkUrl: "Build/WebGL.framework.js",
+        codeUrl: "Build/WebGL.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "Chucha Chupucha",
+        productVersion: "1.0",
+      });
+    </script>
+  </body>
+</html>
