@@ -111,8 +111,8 @@
       "hash": "55bc606b0ae04e2368bdaeda903440570bd44900"
     },
     "com.unity.multiplayer.tools": {
-      "version": "1.0.0",
-      "depth": 0,
+      "version": "1.0.0-pre.7",
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.profiling.core": "1.0.0-pre.1",
@@ -149,7 +149,7 @@
     },
     "com.unity.profiling.core": {
       "version": "1.0.0-pre.1",
-      "depth": 1,
+      "depth": 2,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
