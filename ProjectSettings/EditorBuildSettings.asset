@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Chucha Chupucha/Scenes/game.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Chucha Chupucha/Scenes/test room.unity
+    guid: ea32360b1e46bac4992b60f335de6c6c
   m_configObjects: {}
