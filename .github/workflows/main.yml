@@ -9,7 +9,7 @@ env:
 
 jobs:
 
-  copy-to-branches:
+  copyTomlFile:
     needs: Deploy_WEBGL
     runs-on: ubuntu-latest
     steps:
