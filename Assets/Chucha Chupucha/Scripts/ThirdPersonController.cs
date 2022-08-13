@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Unity.Netcode;
+using Fusion;
 
 public class ThirdPersonController : NetworkBehaviour
 {
@@ -122,18 +122,18 @@ public class ThirdPersonController : NetworkBehaviour
         }
     }
 
-    public override void OnNetworkSpawn()
-    {
-        base.OnNetworkSpawn();
+    //public override void OnNetworkSpawn()
+    //{
+    //    base.OnNetworkSpawn();
 
-        if(!IsLocalPlayer)
-        {
-            return;
-        }
+    //    if(!IsLocalPlayer)
+    //    {
+    //        return;
+    //    }
 
-        PlayerInput playerInput = GetComponent<PlayerInput>();
-        playerInput.enabled = true;
-    }
+    //    PlayerInput playerInput = GetComponent<PlayerInput>();
+    //    playerInput.enabled = true;
+    //}
 
     private void Start()
     {
@@ -155,18 +155,18 @@ public class ThirdPersonController : NetworkBehaviour
         _jumpTimeoutDelta = JumpTimeout;
         _fallTimeoutDelta = FallTimeout;
 
-        if(IsClient && IsOwner)
-        {
-            GameObject.FindWithTag("PlayerFollowCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
-        }
+        //if(IsClient && IsOwner)
+        //{
+        //    GameObject.FindWithTag("PlayerFollowCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
+        //}
     }
 
     private void Update()
     {
-        if (!IsLocalPlayer)
-        {
-            return;
-        }
+        //if (!IsLocalPlayer)
+        //{
+        //    return;
+        //}
 
         _hasAnimator = TryGetComponent(out _animator);
 
