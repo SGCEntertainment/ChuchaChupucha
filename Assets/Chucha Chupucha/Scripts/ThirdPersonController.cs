@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Fusion;
+using Fusion.Sockets;
+using System.Collections.Generic;
 
 public class ThirdPersonController : NetworkBehaviour
 {
@@ -159,6 +161,11 @@ public class ThirdPersonController : NetworkBehaviour
         //{
         //    GameObject.FindWithTag("PlayerFollowCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
         //}
+
+        if(Runner.LocalPlayer)
+        {
+            GameObject.FindWithTag("PlayerFollowCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
+        }
     }
 
     private void Update()
