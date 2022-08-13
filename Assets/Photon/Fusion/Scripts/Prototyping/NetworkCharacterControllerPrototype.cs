@@ -6,7 +6,8 @@ using UnityEngine;
 [OrderBefore(typeof(NetworkTransform))]
 [DisallowMultipleComponent]
 // ReSharper disable once CheckNamespace
-public class NetworkCharacterControllerPrototype : NetworkTransform {
+public class NetworkCharacterControllerPrototype : NetworkTransform 
+{
   [Header("Character Controller Settings")]
   public float gravity       = -20.0f;
   public float jumpImpulse   = 8.0f;

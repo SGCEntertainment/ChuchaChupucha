@@ -4,7 +4,7 @@ using Fusion;
 using Fusion.Sockets;
 using System.Collections.Generic;
 
-public class ThirdPersonController : NetworkBehaviour
+public class ThirdPersonController : NetworkTransform
 {
     [Header("Player")]
     [Tooltip("Move speed of the character in m/s")]
@@ -38,9 +38,8 @@ public class ThirdPersonController : NetworkBehaviour
     [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
     public float FallTimeout = 0.15f;
 
-    [Header("Player Grounded")]
-    [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
-    public bool Grounded = true;
+    [Networked, HideInInspector]
+    public bool Grounded { get; set; }
 
     [Tooltip("Useful for rough ground")]
     public float GroundedOffset = -0.14f;
@@ -95,7 +94,7 @@ public class ThirdPersonController : NetworkBehaviour
 #endif
     private Animator _animator;
     private CharacterController _controller;
-    private StarterAssets.StarterAssetsInputs _input;
+    private InputColntroller _input;
     private GameObject _mainCamera;
 
     private const float _threshold = 0.01f;
@@ -114,14 +113,30 @@ public class ThirdPersonController : NetworkBehaviour
         }
     }
 
-
-    private void Awake()
+    protected override void Awake()
     {
-        // get a reference to our main camera
+        base.Awake();
+        CacheController();
+
         if (_mainCamera == null)
         {
             _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         }
+    }
+
+    protected override void CopyFromBufferToEngine()
+    {
+        // Trick: CC must be disabled before resetting the transform state
+        _controller.enabled = false;
+
+        // Pull base (NetworkTransform) state from networked data buffer
+        base.CopyFromBufferToEngine();
+
+        // Re-enable CC
+        _controller.enabled = true;
+
+        PlayerInput playerInput = GetComponent<PlayerInput>();
+        playerInput.enabled = true;
     }
 
     //public override void OnNetworkSpawn()
@@ -136,6 +151,21 @@ public class ThirdPersonController : NetworkBehaviour
     //    PlayerInput playerInput = GetComponent<PlayerInput>();
     //    playerInput.enabled = true;
     //}
+    public override void Spawned()
+    {
+        base.Spawned();
+        CacheController();
+    }
+
+    private void CacheController()
+    {
+        if (_controller == null)
+        {
+            _controller = GetComponent<CharacterController>();
+            Assert.Check(_controller != null, $"An object with {nameof(NetworkCharacterControllerPrototype)} must also have a {nameof(CharacterController)} component.");
+        }
+    }
+
 
     private void Start()
     {
@@ -143,7 +173,7 @@ public class ThirdPersonController : NetworkBehaviour
 
         _hasAnimator = TryGetComponent(out _animator);
         _controller = GetComponent<CharacterController>();
-        _input = GetComponent<StarterAssets.StarterAssetsInputs>();
+        _input = GetComponent<InputColntroller>();
         
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         _playerInput = GetComponent<PlayerInput>();
@@ -241,13 +271,13 @@ public class ThirdPersonController : NetworkBehaviour
 
         // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
         // if there is no input, set the target speed to 0
-        if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+        if (_input.MoveDirection == Vector2.zero) targetSpeed = 0.0f;
 
         // a reference to the players current horizontal velocity
         float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
         float speedOffset = 0.1f;
-        float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
+        float inputMagnitude = _input.analogMovement ? _input.MoveDirection.magnitude : 1f;
 
         // accelerate or decelerate to target speed
         if (currentHorizontalSpeed < targetSpeed - speedOffset ||
@@ -270,11 +300,11 @@ public class ThirdPersonController : NetworkBehaviour
         if (_animationBlend < 0.01f) _animationBlend = 0f;
 
         // normalise input direction
-        Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+        Vector3 inputDirection = new Vector3(_input.MoveDirection.x, 0.0f, _input.MoveDirection.y).normalized;
 
         // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
         // if there is a move input rotate player when the player is moving
-        if (_input.move != Vector2.zero)
+        if (_input.MoveDirection != Vector2.zero)
         {
             _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                               _mainCamera.transform.eulerAngles.y;

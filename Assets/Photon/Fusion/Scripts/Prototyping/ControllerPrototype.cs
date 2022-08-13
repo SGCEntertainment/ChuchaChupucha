@@ -1,9 +1,9 @@
-
 using UnityEngine;
 using Fusion;
 
 [ScriptHelp(BackColor = EditorHeaderBackColor.Steel)]
-public class ControllerPrototype : Fusion.NetworkBehaviour {
+public class ControllerPrototype : NetworkBehaviour 
+{
   protected NetworkCharacterControllerPrototype _ncc;
   protected NetworkRigidbody _nrb;
   protected NetworkRigidbody2D _nrb2d;
