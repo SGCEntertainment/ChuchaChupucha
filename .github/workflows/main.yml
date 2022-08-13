@@ -56,3 +56,10 @@ jobs:
         with:
           branch: webpage
           folder: build/WebGL
+          
+      - name: Copy To Branches Action
+        uses: planetoftheweb/copy-to-branches@v1
+        env:
+          key: master
+          branches: webpage
+          files: netlify.toml
