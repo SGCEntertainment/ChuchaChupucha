@@ -57,6 +57,9 @@ jobs:
           branch: webpage
           folder: build/WebGL
           
+      - name: work around permission issue
+        run: git config --global --add safe.directory /github/workspace
+          
       - name: Copy To Branches Action
         uses: planetoftheweb/copy-to-branches@v1
         env:
