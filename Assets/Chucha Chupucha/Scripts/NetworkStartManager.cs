@@ -30,7 +30,7 @@ public class NetworkStartManager : MonoBehaviour
             GameMode = gameMode,
             Address = address,
             Scene = scene,
-            SessionName = Guid.NewGuid().ToString(),
+            SessionName = "test",
             Initialized = initialized,
             SceneManager = sceneManager
         });
