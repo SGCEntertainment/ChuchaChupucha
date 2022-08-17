@@ -96,7 +96,8 @@ public class InputBehaviourPrototype : Fusion.Behaviour, INetworkRunnerCallbacks
 /// <summary>
 /// Example definition of an INetworkStruct.
 /// </summary>
-public struct NetworkInputPrototype : INetworkInput {
+public struct NetworkInputPrototype : INetworkInput 
+{
 
   public const int BUTTON_USE      = 0;
   public const int BUTTON_FIRE     = 1;
