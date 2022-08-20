@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7594397612819054027}
   - component: {fileID: 7594397612819054026}
   - component: {fileID: 7594397612819054024}
-  - component: {fileID: 7594397612819054031}
   - component: {fileID: 7594397612819054030}
+  - component: {fileID: 7594397612819054031}
   m_Layer: 0
   m_Name: networkRunnerPrefab
   m_TagString: Untagged
@@ -61,23 +61,6 @@ MonoBehaviour:
   PlayerPrefab: {fileID: 7400561606439159899, guid: 40eab3b39026e4a4daaec0729defbec7, type: 3}
   SpawnMethod: 0
   StateAuthority: 0
---- !u!114 &7594397612819054031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7594397612819054029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b55a6ca2d069a447a0201119c57bc9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Sequence: 0
-  BlockingLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  BlockedCheckRadius: 2
 --- !u!114 &7594397612819054030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,3 +121,20 @@ MonoBehaviour:
   OnReliableData:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7594397612819054031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7594397612819054029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b55a6ca2d069a447a0201119c57bc9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sequence: 0
+  BlockingLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  BlockedCheckRadius: 2
