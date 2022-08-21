@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  maxStrength: 35
+  maxStrength: 100
 --- !u!143 &7238584377288907800
 CharacterController:
   m_ObjectHideFlags: 0
